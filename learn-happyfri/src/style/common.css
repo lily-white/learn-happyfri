@@ -5,7 +5,6 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     font-style: normal;
     text-decoration: none;
     border: none;
-    color: #313131;
     box-sizing: border-box;
     font-weight: lighter;
     font-family: 'Microsoft YaHei';
@@ -89,4 +88,15 @@ body{
    display: inline-block;
    margin: 0 auto;
    background-position: 50%;
+}
+.container {
+    text-align: center;
+    padding-top: 2.56rem;
+}
+.container-style {
+    background-size: 100%;
+    width: 8.21rem;
+    height: 7.25rem;
+    margin: 0 auto;
+    position: relative;
 }
