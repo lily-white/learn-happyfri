@@ -8,19 +8,21 @@
 				<h6 class="item-title">{{itemDetail[itemNum-1].topic_name}}</h6>
 				<ul>
 					<li class="item" 
-						v-for="(answer, index) in itemDetail[itemNum-1].topic_answer">
-						<span class="option-style" >{{chooseType(index)}}</span>
+						v-for="(answer, index) in itemDetail[itemNum-1].topic_answer"
+						@click="choose(index, answer.topic_answer_id)">
+						<span class="option-style" :class="{'is-choosed' : index === choosedNum}">{{chooseType(index)}}</span>
 						<span class="option-detail">{{answer.answer_name}}</span>
 					</li>
 				</ul>
 			</div>
 		</div>
 
-		<router-link to="item" class="next button"></router-link>
+		<div class="next button" @click="nextItem" v-if="itemNum < itemDetail.length"></div>
+		<div v-else class="submit button" @click="submit"></div>
 	</div>
 </template>
 <script>
-	import {mapState} from 'vuex' 
+	import {mapState, mapActions} from 'vuex' 
 	export default {
 		name: 'item',
 		data() {
@@ -35,12 +37,35 @@
 			'itemDetail'
 		]),
 		methods: {
+			...mapActions(
+				['addNum']
+			),
 			chooseType(type) {
 				switch(type) {
 					case 0: return 'A';
 					case 1: return 'B';
 					case 2: return 'C';
 					case 3: return 'D';
+				}
+			},
+			choose(type, id) {
+				this.choosedNum = type;
+				this.choosedId = id;
+			},
+			nextItem() {
+				if(this.choosedNum !== null) {
+					this.choosedNum = null;
+					this.addNum(this.choosedId);
+				}else {
+					alert('您还没有选择答案哦');
+				}
+			},
+			submit() {
+				if(this.choosedNum !== null) {
+					this.addNum(this.choosedId);
+					this.$router.push('score');
+				}else {
+					alert('您还没有选择答案哦');
 				}
 			}
 		}
@@ -55,6 +80,9 @@
 	}
 	.next {
 		background-image: url("~@/images/2-2.png");
+	}
+	.submit {
+		background-image: url("~@/images/3-1.png");
 	}
 	.item-list-container {
 		width: 375px;
