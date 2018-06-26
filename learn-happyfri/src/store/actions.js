@@ -1,6 +1,10 @@
+import axios from 'axios'
+
 export default {
 	initializeData({commit}) {
-		commit('INITIALIZE_DATA');
+		axios.get('/getTopics').then(function (response) {
+			commit('INITIALIZE_DATA', response.data);
+		})
 	},
 	addNum({commit, state}, id) {
 		commit('REMEMBER_ANSWER', id);

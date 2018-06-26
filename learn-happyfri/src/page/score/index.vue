@@ -6,11 +6,11 @@
 			</header>
 			<div class="result-tips">{{scoreTips}}</div>
 		</div>
-		<div class="share-button button" @click="showMask"></div>
+		<div class="share-button button" @click="isShow=true"></div>
 		<p class="share-txt">关注葡萄之家，获取答案。</p>
 		<div class="share-code">
 		</div>
-		<div class="mask" v-show="isShow">
+		<div class="mask" v-show="isShow" @click="isShow=false">
 			<img src="../../../static/5-2.png" class="share-img">
 		</div>
 	</div>
@@ -58,9 +58,6 @@
 	            if(this.score <= 100) {
 	                this.scoreTips = this.scoreTipsArr[4];
 	            }
-			},
-			showMask() {
-				this.isShow = true;
 			}
 		},
 		created() {

@@ -7,7 +7,9 @@ import store from './store/'
 import 'lib-flexible/flexible.js'
 import './style/common.css'
 
+
 Vue.config.productionTip = false
+require('./mock/index.js')
 
 /* eslint-disable no-new */
 new Vue({
